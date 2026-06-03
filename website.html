@@ -1,0 +1,1301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#2563eb">
+    <meta name="description" content="Smart Campus Management System website for school users, admissions, teachers, and administrators.">
+    <title>Smart Campus Management System | School Portal</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="assets/icons/icon-192.png">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --site-ink: #102033;
+            --site-muted: #5f6f82;
+            --site-line: #d8e2ef;
+            --site-soft: #f6f9fc;
+            --site-primary: #1f5eff;
+            --site-primary-dark: #143a9a;
+            --site-accent: #0f8096;
+            --site-warm: #f59e0b;
+            --site-deep: #101828;
+        }
+
+        body {
+            background: #ffffff;
+            color: var(--site-ink);
+            font-size: 15px;
+        }
+
+        .site-shell {
+            min-height: 100vh;
+            background:
+                linear-gradient(180deg, rgba(232, 240, 252, 0.95) 0%, #ffffff 44%),
+                #ffffff;
+        }
+
+        .site-nav {
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            border-bottom: 1px solid rgba(216, 226, 239, 0.84);
+            background: rgba(255, 255, 255, 0.94);
+            backdrop-filter: blur(16px);
+        }
+
+        .nav-inner,
+        .section-inner {
+            width: min(1240px, calc(100% - 32px));
+            margin: 0 auto;
+        }
+
+        .nav-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: 0.9rem 0;
+        }
+
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--site-ink);
+            text-decoration: none;
+            font-weight: 800;
+            letter-spacing: 0;
+        }
+
+        .brand-mark {
+            width: 42px;
+            height: 42px;
+            display: inline-grid;
+            place-items: center;
+            border-radius: 0.5rem;
+            background: #ffffff;
+            border: 1px solid var(--site-line);
+            color: var(--site-primary);
+            box-shadow: 0 10px 26px rgba(15, 32, 51, 0.08);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .nav-link-lite {
+            color: var(--site-muted);
+            text-decoration: none;
+            font-weight: 700;
+            padding: 0.6rem 0.2rem;
+        }
+
+        .nav-link-lite:hover {
+            color: var(--site-primary);
+        }
+
+        .hero {
+            padding: 3.2rem 0 2rem;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 0.92fr) minmax(360px, 1.08fr);
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--site-primary-dark);
+            background: rgba(37, 99, 235, 0.1);
+            border: 1px solid rgba(37, 99, 235, 0.2);
+            border-radius: 999px;
+            padding: 0.45rem 0.75rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .hero h1 {
+            max-width: 760px;
+            color: var(--site-ink);
+            font-size: clamp(2.25rem, 5vw, 4.45rem);
+            line-height: 1.02;
+            margin-bottom: 1.25rem;
+            letter-spacing: 0;
+        }
+
+        .hero-copy {
+            max-width: 660px;
+            color: var(--site-muted);
+            font-size: 1.08rem;
+            line-height: 1.75;
+        }
+
+        .hero-kicker {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 0.75rem;
+            max-width: 680px;
+            margin-top: 1.25rem;
+        }
+
+        .kicker-card {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            padding: 0.8rem;
+            border: 1px solid rgba(216, 226, 239, 0.9);
+            border-radius: 0.5rem;
+            background: rgba(255, 255, 255, 0.78);
+        }
+
+        .kicker-card i {
+            width: 36px;
+            height: 36px;
+            display: inline-grid;
+            place-items: center;
+            border-radius: 0.5rem;
+            background: rgba(31, 94, 255, 0.1);
+            color: var(--site-primary);
+            flex: 0 0 auto;
+        }
+
+        .kicker-card strong {
+            display: block;
+            color: var(--site-ink);
+            line-height: 1.2;
+        }
+
+        .kicker-card span {
+            color: var(--site-muted);
+            font-size: 0.86rem;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            margin: 1.6rem 0 1.4rem;
+        }
+
+        .btn-site {
+            min-height: 48px;
+            border-radius: 0.5rem;
+            padding: 0.8rem 1.05rem;
+            font-weight: 800;
+            text-decoration: none;
+            border: 1px solid transparent;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.55rem;
+            line-height: 1;
+        }
+
+        .btn-site-primary {
+            color: #ffffff;
+            background: var(--site-primary);
+            box-shadow: 0 16px 32px rgba(37, 99, 235, 0.22);
+        }
+
+        .btn-site-primary:hover {
+            color: #ffffff;
+            background: var(--site-primary-dark);
+        }
+
+        .btn-site-secondary {
+            color: var(--site-ink);
+            background: #ffffff;
+            border-color: var(--site-line);
+        }
+
+        .btn-site-secondary:hover {
+            color: var(--site-primary);
+            border-color: rgba(37, 99, 235, 0.34);
+        }
+
+        .trust-strip {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 0.75rem;
+            max-width: 760px;
+        }
+
+        .trust-item {
+            border-left: 3px solid var(--site-primary);
+            padding: 0.45rem 0.75rem;
+            background: rgba(255, 255, 255, 0.72);
+        }
+
+        .trust-item strong {
+            display: block;
+            color: var(--site-ink);
+            font-size: 1rem;
+        }
+
+        .trust-item span {
+            color: var(--site-muted);
+            font-size: 0.9rem;
+        }
+
+        .visual-stack {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .campus-visual {
+            min-height: 320px;
+            border: 1px solid var(--site-line);
+            border-radius: 0.5rem;
+            overflow: hidden;
+            background:
+                linear-gradient(180deg, rgba(16, 24, 40, 0.04), rgba(16, 24, 40, 0.52)),
+                url("https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1200&q=80") center/cover;
+            box-shadow: 0 26px 64px rgba(16, 32, 51, 0.16);
+            display: flex;
+            align-items: flex-end;
+            padding: 1rem;
+        }
+
+        .campus-caption {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.24);
+            border-radius: 0.5rem;
+            background: rgba(16, 24, 40, 0.62);
+            color: #ffffff;
+            backdrop-filter: blur(12px);
+        }
+
+        .campus-caption strong {
+            display: block;
+            font-size: 1.15rem;
+        }
+
+        .campus-caption span {
+            color: rgba(255, 255, 255, 0.78);
+        }
+
+        .portal-preview {
+            background: #ffffff;
+            border: 1px solid var(--site-line);
+            border-radius: 0.5rem;
+            box-shadow: 0 26px 64px rgba(16, 32, 51, 0.14);
+            overflow: hidden;
+        }
+
+        .preview-topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: 1rem;
+            border-bottom: 1px solid var(--site-line);
+        }
+
+        .preview-title {
+            margin: 0;
+            color: var(--site-ink);
+            font-size: 1rem;
+            font-weight: 800;
+        }
+
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            border-radius: 999px;
+            background: rgba(15, 159, 143, 0.12);
+            color: #08766b;
+            padding: 0.35rem 0.7rem;
+            font-size: 0.82rem;
+            font-weight: 800;
+        }
+
+        .preview-body {
+            display: grid;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--site-soft);
+        }
+
+        .metric-row {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 0.75rem;
+        }
+
+        .metric,
+        .module-row,
+        .install-panel {
+            background: #ffffff;
+            border: 1px solid var(--site-line);
+            border-radius: 0.5rem;
+        }
+
+        .metric {
+            padding: 0.9rem;
+        }
+
+        .metric strong {
+            display: block;
+            color: var(--site-ink);
+            font-size: 1.35rem;
+        }
+
+        .metric span {
+            color: var(--site-muted);
+            font-size: 0.84rem;
+        }
+
+        .module-row {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            align-items: center;
+            gap: 0.85rem;
+            padding: 0.85rem;
+        }
+
+        .module-icon {
+            width: 38px;
+            height: 38px;
+            display: inline-grid;
+            place-items: center;
+            border-radius: 0.5rem;
+            background: rgba(37, 99, 235, 0.1);
+            color: var(--site-primary);
+        }
+
+        .module-row p,
+        .module-row h3 {
+            margin: 0;
+        }
+
+        .module-row h3 {
+            color: var(--site-ink);
+            font-size: 0.98rem;
+        }
+
+        .module-row p {
+            color: var(--site-muted);
+            font-size: 0.86rem;
+        }
+
+        .section-band {
+            padding: 3rem 0;
+        }
+
+        .section-band.alt {
+            background: var(--site-soft);
+            border-top: 1px solid var(--site-line);
+            border-bottom: 1px solid var(--site-line);
+        }
+
+        .section-heading {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-bottom: 1.4rem;
+        }
+
+        .section-heading h2 {
+            color: var(--site-ink);
+            font-size: clamp(1.65rem, 3vw, 2.35rem);
+            margin: 0;
+        }
+
+        .section-heading p {
+            max-width: 560px;
+            margin: 0;
+            color: var(--site-muted);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 1rem;
+        }
+
+        .feature-card,
+        .program-card,
+        .timeline-step,
+        .news-card,
+        .contact-card {
+            background: #ffffff;
+            border: 1px solid var(--site-line);
+            border-radius: 0.5rem;
+            padding: 1.1rem;
+        }
+
+        .feature-card {
+            min-height: 180px;
+        }
+
+        .feature-card i {
+            color: var(--site-primary);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            color: var(--site-ink);
+            font-size: 1.05rem;
+            margin-bottom: 0.55rem;
+        }
+
+        .feature-card p {
+            color: var(--site-muted);
+            margin: 0;
+        }
+
+        .program-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1rem;
+        }
+
+        .program-card {
+            min-height: 210px;
+        }
+
+        .program-card h3,
+        .timeline-step h3,
+        .news-card h3,
+        .contact-card h3 {
+            color: var(--site-ink);
+            font-size: 1.08rem;
+            margin-bottom: 0.55rem;
+        }
+
+        .program-card p,
+        .timeline-step p,
+        .news-card p,
+        .contact-card p {
+            color: var(--site-muted);
+            margin: 0;
+        }
+
+        .program-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            margin-bottom: 1rem;
+            padding: 0.38rem 0.65rem;
+            border-radius: 999px;
+            background: rgba(15, 128, 150, 0.1);
+            color: #0b6678;
+            font-size: 0.8rem;
+            font-weight: 800;
+        }
+
+        .timeline-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 1rem;
+            counter-reset: step;
+        }
+
+        .timeline-step {
+            position: relative;
+            min-height: 190px;
+        }
+
+        .timeline-step::before {
+            counter-increment: step;
+            content: counter(step);
+            display: grid;
+            place-items: center;
+            width: 38px;
+            height: 38px;
+            margin-bottom: 1rem;
+            border-radius: 0.5rem;
+            background: var(--site-deep);
+            color: #ffffff;
+            font-weight: 900;
+        }
+
+        .school-life {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(300px, 0.7fr);
+            gap: 1rem;
+        }
+
+        .life-panel {
+            min-height: 360px;
+            border-radius: 0.5rem;
+            border: 1px solid var(--site-line);
+            overflow: hidden;
+            background:
+                linear-gradient(90deg, rgba(16, 24, 40, 0.78), rgba(16, 24, 40, 0.24)),
+                url("https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1200&q=80") center/cover;
+            display: flex;
+            align-items: flex-end;
+            padding: 1.25rem;
+        }
+
+        .life-panel-content {
+            max-width: 560px;
+            color: #ffffff;
+        }
+
+        .life-panel-content h2 {
+            color: #ffffff;
+            font-size: clamp(1.65rem, 3vw, 2.3rem);
+            margin-bottom: 0.75rem;
+        }
+
+        .life-panel-content p {
+            color: rgba(255, 255, 255, 0.78);
+            margin: 0;
+        }
+
+        .life-list {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .life-item {
+            display: flex;
+            gap: 0.85rem;
+            padding: 1rem;
+            border: 1px solid var(--site-line);
+            border-radius: 0.5rem;
+            background: #ffffff;
+        }
+
+        .life-item i {
+            width: 38px;
+            height: 38px;
+            display: inline-grid;
+            place-items: center;
+            flex: 0 0 auto;
+            border-radius: 0.5rem;
+            background: rgba(245, 158, 11, 0.14);
+            color: #a76305;
+        }
+
+        .life-item strong {
+            display: block;
+            color: var(--site-ink);
+        }
+
+        .life-item span {
+            color: var(--site-muted);
+        }
+
+        .news-grid,
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1rem;
+        }
+
+        .news-date {
+            display: inline-block;
+            margin-bottom: 0.75rem;
+            color: var(--site-primary-dark);
+            font-weight: 900;
+            font-size: 0.82rem;
+            text-transform: uppercase;
+        }
+
+        .contact-card i {
+            color: var(--site-primary);
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .access-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 0.85fr) minmax(320px, 1.15fr);
+            gap: 1.5rem;
+            align-items: stretch;
+        }
+
+        .install-panel {
+            padding: 1.25rem;
+        }
+
+        .install-panel h2 {
+            color: var(--site-ink);
+            font-size: 1.7rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .install-panel p {
+            color: var(--site-muted);
+        }
+
+        .install-note {
+            border: 1px dashed rgba(37, 99, 235, 0.32);
+            border-radius: 0.5rem;
+            background: rgba(37, 99, 235, 0.07);
+            color: var(--site-primary-dark);
+            padding: 0.85rem;
+            margin: 1rem 0;
+            font-weight: 700;
+        }
+
+        .role-list {
+            display: grid;
+            gap: 0.75rem;
+        }
+
+        .role-list a {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+            padding: 0.9rem 1rem;
+            border: 1px solid var(--site-line);
+            border-radius: 0.5rem;
+            background: #ffffff;
+            color: var(--site-ink);
+            text-decoration: none;
+            font-weight: 800;
+        }
+
+        .role-list a:hover {
+            border-color: rgba(37, 99, 235, 0.38);
+            color: var(--site-primary);
+        }
+
+        .footer {
+            padding: 2.6rem 0 1.4rem;
+            background: var(--site-deep);
+            color: rgba(255, 255, 255, 0.78);
+        }
+
+        .footer-inner {
+            display: grid;
+            grid-template-columns: minmax(280px, 1.25fr) repeat(3, minmax(160px, 0.75fr));
+            gap: 1.4rem;
+            align-items: start;
+        }
+
+        .footer-brand {
+            max-width: 420px;
+        }
+
+        .footer-logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.7rem;
+            color: #ffffff;
+            font-size: 1.08rem;
+            font-weight: 900;
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-logo i {
+            width: 38px;
+            height: 38px;
+            display: inline-grid;
+            place-items: center;
+            border-radius: 0.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+        }
+
+        .footer-brand p,
+        .footer-column p {
+            margin: 0;
+            line-height: 1.7;
+        }
+
+        .footer-column h3 {
+            color: #ffffff;
+            font-size: 0.95rem;
+            margin: 0 0 0.8rem;
+        }
+
+        .footer-links,
+        .footer-contact-list {
+            display: grid;
+            gap: 0.6rem;
+        }
+
+        .footer-contact-list span,
+        .footer-contact-list a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.55rem;
+        }
+
+        .footer-contact-list i,
+        .footer-social a i {
+            width: 18px;
+            text-align: center;
+        }
+
+        .footer-social {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.55rem;
+        }
+
+        .footer-social a {
+            width: 40px;
+            height: 40px;
+            display: inline-grid;
+            place-items: center;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 0.5rem;
+            background: rgba(255, 255, 255, 0.08);
+            color: #ffffff;
+        }
+
+        .footer-social a:hover {
+            background: var(--site-primary);
+            border-color: var(--site-primary);
+        }
+
+        .footer-bottom {
+            width: min(1240px, calc(100% - 32px));
+            margin: 1.8rem auto 0;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.12);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+            font-size: 0.9rem;
+        }
+
+        .footer strong {
+            color: #ffffff;
+        }
+
+        .footer a {
+            color: rgba(255, 255, 255, 0.82);
+            text-decoration: none;
+            font-weight: 800;
+        }
+
+        .footer a:hover {
+            color: #ffffff;
+        }
+
+        @media (max-width: 960px) {
+            .hero-grid,
+            .access-grid,
+            .school-life {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-grid,
+            .program-grid,
+            .timeline-grid,
+            .news-grid,
+            .contact-grid,
+            .footer-inner {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 680px) {
+            .nav-inner {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .nav-actions {
+                width: 100%;
+                justify-content: flex-start;
+            }
+
+            .hero {
+                padding-top: 2.5rem;
+            }
+
+            .trust-strip,
+            .metric-row,
+            .feature-grid,
+            .program-grid,
+            .timeline-grid,
+            .news-grid,
+            .contact-grid,
+            .hero-kicker {
+                grid-template-columns: 1fr;
+            }
+
+            .section-heading {
+                display: block;
+            }
+
+            .footer-inner,
+            .footer-bottom {
+                grid-template-columns: 1fr;
+                display: grid;
+            }
+
+            .btn-site {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="site-shell">
+        <header class="site-nav">
+            <div class="nav-inner">
+                <a class="brand" href="website.html" aria-label="Smart Campus home">
+                    <span class="brand-mark"><i class="fa-solid fa-graduation-cap"></i></span>
+                    <span>Smart Campus System</span>
+                </a>
+                <nav class="nav-actions" aria-label="Main navigation">
+                    <a class="nav-link-lite" href="#programs">Programs</a>
+                    <a class="nav-link-lite" href="#admissions">Admissions</a>
+                    <a class="nav-link-lite" href="#features">Features</a>
+                    <a class="nav-link-lite" href="#install">Install App</a>
+                    <a class="nav-link-lite" href="#contact">Contact</a>
+                    <a class="btn-site btn-site-secondary" href="pages/auth/register.php">
+                        <i class="fa-solid fa-user-plus"></i>
+                        Sign Up
+                    </a>
+                    <a class="btn-site btn-site-primary" href="pages/auth/login.php">
+                        <i class="fa-solid fa-right-to-bracket"></i>
+                        Sign In
+                    </a>
+                </nav>
+            </div>
+        </header>
+
+        <main>
+            <section class="hero">
+                <div class="section-inner hero-grid">
+                    <div>
+                        <div class="eyebrow">
+                            <i class="fa-solid fa-shield-halved"></i>
+                            Modern school web portal
+                        </div>
+                        <h1>Smart Campus Management System</h1>
+                        <p class="hero-copy">
+                            A complete school website and digital campus portal for admissions, student services,
+                            faculty workflows, registrar operations, finance records, and administrative oversight.
+                            Families can learn about the school, while students and staff can enter the secure portal
+                            from one professional front door.
+                        </p>
+                        <div class="hero-kicker" aria-label="School highlights">
+                            <div class="kicker-card">
+                                <i class="fa-solid fa-school"></i>
+                                <div>
+                                    <strong>Academic excellence</strong>
+                                    <span>Organized learning and support services.</span>
+                                </div>
+                            </div>
+                            <div class="kicker-card">
+                                <i class="fa-solid fa-laptop-file"></i>
+                                <div>
+                                    <strong>Digital-first campus</strong>
+                                    <span>Enrollment, grades, payments, and records online.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hero-actions">
+                            <a class="btn-site btn-site-primary" href="pages/auth/login.php">
+                                <i class="fa-solid fa-right-to-bracket"></i>
+                                Open School Portal
+                            </a>
+                            <a class="btn-site btn-site-secondary" href="pages/auth/register.php">
+                                <i class="fa-solid fa-user-plus"></i>
+                                Create Account
+                            </a>
+                            <button class="btn-site btn-site-secondary pwa-install-btn" type="button" style="display: none;">
+                                <i class="fa-solid fa-download"></i>
+                                Install Web App
+                            </button>
+                        </div>
+                        <div class="trust-strip" aria-label="System highlights">
+                            <div class="trust-item">
+                                <strong>Role-based</strong>
+                                <span>Secure access for each office</span>
+                            </div>
+                            <div class="trust-item">
+                                <strong>Installable</strong>
+                                <span>PWA support for devices</span>
+                            </div>
+                            <div class="trust-item">
+                                <strong>Responsive</strong>
+                                <span>Ready for phones and desktops</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="visual-stack">
+                        <figure class="campus-visual" aria-label="Modern school campus">
+                            <figcaption class="campus-caption">
+                                <strong>One connected campus experience</strong>
+                                <span>Designed for students, families, faculty, and school offices.</span>
+                            </figcaption>
+                        </figure>
+
+                        <aside class="portal-preview" aria-label="School dashboard preview">
+                            <div class="preview-topbar">
+                                <p class="preview-title">Campus Portal Snapshot</p>
+                                <span class="status-pill">
+                                    <i class="fa-solid fa-circle-check"></i>
+                                    Live Portal
+                                </span>
+                            </div>
+                            <div class="preview-body">
+                                <div class="metric-row">
+                                    <div class="metric">
+                                        <strong>7</strong>
+                                        <span>User portals</span>
+                                    </div>
+                                    <div class="metric">
+                                        <strong>24/7</strong>
+                                        <span>Online access</span>
+                                    </div>
+                                    <div class="metric">
+                                        <strong>PWA</strong>
+                                        <span>Web app ready</span>
+                                    </div>
+                                </div>
+                                <div class="module-row">
+                                    <span class="module-icon"><i class="fa-solid fa-user-graduate"></i></span>
+                                    <div>
+                                        <h3>Student Services</h3>
+                                        <p>Grades, schedules, enrollment, and payments.</p>
+                                    </div>
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                </div>
+                                <div class="module-row">
+                                    <span class="module-icon"><i class="fa-solid fa-chalkboard-user"></i></span>
+                                    <div>
+                                        <h3>Faculty Workspace</h3>
+                                        <p>Classes, attendance, grade input, and schedules.</p>
+                                    </div>
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                </div>
+                                <div class="module-row">
+                                    <span class="module-icon"><i class="fa-solid fa-building-columns"></i></span>
+                                    <div>
+                                        <h3>Office Management</h3>
+                                        <p>Registrar, finance, reports, approvals, and users.</p>
+                                    </div>
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                </div>
+                            </div>
+                        </aside>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section-band" id="programs">
+                <div class="section-inner">
+                    <div class="section-heading">
+                        <h2>Academic programs and student pathways</h2>
+                        <p>Present the school with confidence while connecting each pathway to the services students need after enrollment.</p>
+                    </div>
+                    <div class="program-grid">
+                        <article class="program-card">
+                            <span class="program-tag"><i class="fa-solid fa-book-open-reader"></i> Basic Education</span>
+                            <h3>Foundation learning</h3>
+                            <p>Structured academic support, class schedules, attendance monitoring, and progress tracking for daily learning.</p>
+                        </article>
+                        <article class="program-card">
+                            <span class="program-tag"><i class="fa-solid fa-flask"></i> Senior High</span>
+                            <h3>Career-ready preparation</h3>
+                            <p>Subject management, faculty coordination, and student records built for organized academic planning.</p>
+                        </article>
+                        <article class="program-card">
+                            <span class="program-tag"><i class="fa-solid fa-graduation-cap"></i> College Services</span>
+                            <h3>Higher education support</h3>
+                            <p>Enrollment requests, registrar workflows, finance records, and grade visibility for modern campus operations.</p>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section-band alt" id="features">
+                <div class="section-inner">
+                    <div class="section-heading">
+                        <h2>Built for daily school operations</h2>
+                        <p>Everything is organized around the work each campus role needs to complete quickly and clearly.</p>
+                    </div>
+                    <div class="feature-grid">
+                        <article class="feature-card">
+                            <i class="fa-solid fa-chart-line"></i>
+                            <h3>Dashboards</h3>
+                            <p>Clear overview screens for students, teachers, administrators, and school offices.</p>
+                        </article>
+                        <article class="feature-card">
+                            <i class="fa-solid fa-clipboard-check"></i>
+                            <h3>Academic Tools</h3>
+                            <p>Manage classes, attendance, grades, subjects, sections, and enrollment workflows.</p>
+                        </article>
+                        <article class="feature-card">
+                            <i class="fa-solid fa-receipt"></i>
+                            <h3>Finance Records</h3>
+                            <p>Support payments, receipts, transactions, and finance reports in one portal.</p>
+                        </article>
+                        <article class="feature-card">
+                            <i class="fa-solid fa-lock"></i>
+                            <h3>Account Security</h3>
+                            <p>Sign in, sign up, email verification, password reset, and administrator approval flows.</p>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section-band" id="admissions">
+                <div class="section-inner">
+                    <div class="section-heading">
+                        <h2>Simple admissions and enrollment flow</h2>
+                        <p>A clear journey helps new students and families know exactly what to do next.</p>
+                    </div>
+                    <div class="timeline-grid">
+                        <article class="timeline-step">
+                            <h3>Create an account</h3>
+                            <p>Applicants register using the school account form and verify their email address.</p>
+                        </article>
+                        <article class="timeline-step">
+                            <h3>Submit enrollment</h3>
+                            <p>Students complete the enrollment request with the details required by the school.</p>
+                        </article>
+                        <article class="timeline-step">
+                            <h3>Review and approval</h3>
+                            <p>Department heads, registrar staff, and administrators review records through their portals.</p>
+                        </article>
+                        <article class="timeline-step">
+                            <h3>Access services</h3>
+                            <p>Approved students can view grades, schedule, payment information, and announcements.</p>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section-band alt">
+                <div class="section-inner school-life">
+                    <div class="life-panel">
+                        <div class="life-panel-content">
+                            <h2>School life, supported by better systems</h2>
+                            <p>From classroom work to finance transactions, the website gives the campus a professional identity and the portal keeps everyday operations moving.</p>
+                        </div>
+                    </div>
+                    <div class="life-list">
+                        <div class="life-item">
+                            <i class="fa-solid fa-bullhorn"></i>
+                            <div>
+                                <strong>Announcements</strong>
+                                <span>Keep users aligned with school updates and reminders.</span>
+                            </div>
+                        </div>
+                        <div class="life-item">
+                            <i class="fa-solid fa-users-gear"></i>
+                            <div>
+                                <strong>Role-based teams</strong>
+                                <span>Students, teachers, registrar, finance, department heads, and admins each get focused tools.</span>
+                            </div>
+                        </div>
+                        <div class="life-item">
+                            <i class="fa-solid fa-mobile-screen-button"></i>
+                            <div>
+                                <strong>Mobile ready</strong>
+                                <span>The site and dashboards adapt for phones, tablets, desktops, and installed PWA use.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section-band" id="install">
+                <div class="section-inner access-grid">
+                    <div class="install-panel">
+                        <h2>Install the school web app</h2>
+                        <p>
+                            Use the install button when your browser supports it, or open the application link and choose
+                            your browser's install option. The installed app launches directly into the Smart Campus portal.
+                        </p>
+                        <div class="install-note">
+                            Application link: <a href="index.php">public/index.php</a>
+                        </div>
+                        <div class="hero-actions">
+                            <button class="btn-site btn-site-primary pwa-install-btn" type="button" style="display: none;">
+                                <i class="fa-solid fa-download"></i>
+                                Install Web App
+                            </button>
+                            <a class="btn-site btn-site-secondary" href="manifest.json">
+                                <i class="fa-solid fa-file-code"></i>
+                                View Manifest
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="install-panel">
+                        <h2>Portal access</h2>
+                        <p>Students and school staff can use these links to enter the system.</p>
+                        <div class="role-list">
+                            <a href="pages/auth/login.php">
+                                <span><i class="fa-solid fa-right-to-bracket"></i> Sign in to existing account</span>
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </a>
+                            <a href="pages/auth/register.php">
+                                <span><i class="fa-solid fa-user-plus"></i> Create a new school account</span>
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </a>
+                            <a href="pages/auth/forgot-password.php">
+                                <span><i class="fa-solid fa-key"></i> Recover forgotten password</span>
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section-band alt">
+                <div class="section-inner">
+                    <div class="section-heading">
+                        <h2>Campus updates</h2>
+                        <p>Use this area for school announcements, enrollment reminders, office schedules, and student service notices.</p>
+                    </div>
+                    <div class="news-grid">
+                        <article class="news-card">
+                            <span class="news-date">Enrollment</span>
+                            <h3>Online enrollment requests are available</h3>
+                            <p>Students can create an account and begin their enrollment process through the Smart Campus portal.</p>
+                        </article>
+                        <article class="news-card">
+                            <span class="news-date">Student Services</span>
+                            <h3>Grades and schedules are centralized</h3>
+                            <p>Approved students can check academic records and class schedules from their own dashboard.</p>
+                        </article>
+                        <article class="news-card">
+                            <span class="news-date">Administration</span>
+                            <h3>School offices can manage records faster</h3>
+                            <p>Registrar, finance, and admin users have dedicated tools for approvals, reports, and transactions.</p>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section-band" id="contact">
+                <div class="section-inner">
+                    <div class="section-heading">
+                        <h2>Contact the school</h2>
+                        <p>Admissions, registrar, finance, and student service inquiries are handled through the campus offices.</p>
+                    </div>
+                    <div class="contact-grid">
+                        <article class="contact-card">
+                            <i class="fa-solid fa-location-dot"></i>
+                            <h3>Campus address</h3>
+                            <p>School Campus, Main Road, City, Province</p>
+                        </article>
+                        <article class="contact-card">
+                            <i class="fa-solid fa-clock"></i>
+                            <h3>Office hours</h3>
+                            <p>Monday to Friday, 8:00 AM to 5:00 PM</p>
+                        </article>
+                        <article class="contact-card">
+                            <i class="fa-solid fa-envelope"></i>
+                            <h3>Admissions desk</h3>
+                            <p>admissions@campus.local<br>+63 961 298 2841</p>
+                        </article>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <div class="section-inner footer-inner">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                        <span>Smart Campus Management System</span>
+                    </div>
+                    <p>
+                        A professional school website and campus portal for admissions, registrar services,
+                        finance records, faculty workflows, student support, and secure administrative access.
+                    </p>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <div class="footer-links">
+                        <a href="website.html">Home</a>
+                        <a href="#programs">Programs</a>
+                        <a href="#admissions">Admissions</a>
+                        <a href="#contact">Contact</a>
+                    </div>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <div class="footer-contact-list">
+                        <a href="mailto:admissions@campus.local">
+                            <i class="fa-solid fa-envelope"></i>
+                            admissions@campus.local
+                        </a>
+                        <a href="tel:+639612982841">
+                            <i class="fa-solid fa-phone"></i>
+                            +63 961 298 2841
+                        </a>
+                        <span>
+                            <i class="fa-solid fa-location-dot"></i>
+                            School Campus, City
+                        </span>
+                    </div>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Connect</h3>
+                    <div class="footer-social" aria-label="Social media links">
+                        <a href="https://web.facebook.com/justin.bonete.90" target="_blank" rel="noopener" aria-label="Facebook">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </a>
+                        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=admissions@campus.local" target="_blank" rel="noopener" aria-label="Gmail">
+                            <i class="fa-brands fa-google"></i>
+                        </a>
+                        <a href="https://web.facebook.com/justin.bonete.90" target="_blank" rel="noopener" aria-label="GitHub">
+                            <i class="fa-brands fa-github"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn">
+                            <i class="fa-brands fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>&copy; 2026 Smart Campus Management System. All rights reserved.</span>
+                <span>
+                    <a href="pages/auth/login.php">Portal Login</a>
+                    &nbsp;|&nbsp;
+                    Developed by <strong>Justin Bonete</strong>
+                </span>
+            </div>
+        </footer>
+    </div>
+
+    <script src="assets/js/pwa.js"></script>
+    <script>
+        const installButtons = document.querySelectorAll('.pwa-install-btn');
+
+        window.addEventListener('beforeinstallprompt', () => {
+            installButtons.forEach((button) => {
+                button.style.display = 'inline-flex';
+            });
+        });
+
+        installButtons.forEach((button) => {
+            button.addEventListener('click', () => {
+                if (typeof PWA !== 'undefined' && typeof PWA.installApp === 'function') {
+                    PWA.installApp();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
